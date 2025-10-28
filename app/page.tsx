@@ -1,16 +1,65 @@
 "use client";
 import Image from 'next/image';
 import Game from '../app/components/game';
-
+import YoutubeModal from './components/YoutubeModal';
+import React, { useState } from 'react';
 
 export default function Home() {
+  // ポップアップの開閉状態を管理
+  const [isOpen, setIsOpen] = useState(false);
+
+  // ポップアップを開く関数
+  const openModal = () => setIsOpen(true);
+
+  // ポップアップを閉じる関数
+  const closeModal = () => setIsOpen(false);
+
   return (
       <main className='flex  flex-col justify-center items-center gap-8 p-4 bg-[#011051] px-16'>
         <div className='w-full my-32 flex justify-center'>
           <Image src="/img/logo.png" alt="Halloween 25 Lit" width={800} height={600} />
         </div>
 
-        <button className="btn btn-primary text-[36px] font-bold bg-[#5FFAA1] rounded-full font-toge-maru-gothic py-4  mx-4 w-full">
+        <button onClick={openModal} className="btn btn-primary text-[36px] font-bold bg-[#5FFAA1] rounded-full font-toge-maru-gothic py-4  mx-4 w-full">
+          {isOpen && (
+        // モーダルのオーバーレイ（背景）
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          backgroundColor: 'rgba(0, 0, 0, 0.7)', // 半透明の黒い背景
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          zIndex: 1000 // 他の要素より手前に表示
+        }}>
+          {/* モーダルのコンテンツエリア */}
+          <div style={{
+            position: 'relative',
+            // ここに元のYouTubeEmbedコンポーネントを配置
+          }}>
+            <YoutubeModal />
+            <button
+              onClick={closeModal}
+              style={{
+                position: 'absolute',
+                top: '5px',
+                right: '5px',
+                border: 'none',
+                background: 'transparent',
+                color: '#fff', // 白いX
+                fontSize: '100px',
+                cursor: 'pointer',
+                fontWeight: 'bold'
+              }}
+            >
+              &times; 
+            </button>
+          </div>
+        </div>
+      )}
           <div className='flex flex-row justify-center items-center gap-4'>
             <Image src="/img/play.svg" alt="Play Icon" width={32} height={32} className='absolute left-32'/>
             <p className='text-black'>動画を再生</p>
