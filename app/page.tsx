@@ -1,6 +1,6 @@
 "use client";
 import Image from 'next/image';
-import React, { useState } from 'react';
+
 
 export default function Home() {
   return (
@@ -21,7 +21,7 @@ export default function Home() {
             <p>webGLをここに</p>
             <div className='text-[#F2F3FF] font-toge-maru-gothic text-[36px] w-full font-black'>
               <h3>操作方法</h3>
-              <p>移動：<span className='font-samasan-donokun'>WASD</span>キー（ <span className='font-samasan-donokun'>or</span> 矢印キー）</p>
+              <p>移動：<span className='font-gotham'>WASD</span>キー（ <span className='font-gotham'>or</span> 矢印キー）</p>
               <p>視点：マウス</p>
             </div>
           </div>
@@ -40,11 +40,11 @@ export default function Home() {
           <p>ディレクター：ピナ</p>
           <p>ゲーム制作：さとたい ぺんぎん アンビ</p>
           <p>デザイナー：りっちゃん かめさん みるぷ むた</p>
-          <p><span className=''>WEB</span>制作：あーる</p>
+          <p><span className='font-gotham'>WEB</span>制作：あーる</p>
           <p>バーチャル背景制作：きゅる にとりん</p>
           <p>映像制作：ゆきま こーた にとりん</p>
           <p>謎：むた</p>
-          <p><span className=''>MC</span>：りょうさん</p>
+          <p><span className='font-gotham'>MC</span>：りょうさん</p>
         </div>
       </main>
   );

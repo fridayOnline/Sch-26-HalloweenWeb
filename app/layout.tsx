@@ -4,7 +4,6 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import localFont from 'next/font/local';
 import './globals.css';
-import TypekitLoader from '../app/components/TypekitLoader';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -51,9 +50,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} ${TogeMaruGothic.variable} ${SamasanDonokun.variable}`}>
-      <head>
-      </head>
-      <TypekitLoader />
+      <link rel="stylesheet" href="https://use.typekit.net/mye5agk.css"></link>
       <body className="antialiased">{children}</body>
     </html>
   );

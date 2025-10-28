@@ -1,4 +1,9 @@
+/* Adobe Fonts (Typekit) is loaded via the TypekitLoader component which uses
+  NEXT_PUBLIC_TYPEKIT_ID. If you prefer @import, replace the below line with
+  the correct kit id URL (not recommended together with the script loader). */
+@import url("https://use.typekit.net/qri2hjr.css");
 @import 'tailwindcss';
+
 
 :root {
   --background: #ffffff;
@@ -12,6 +17,9 @@
   --font-toge-maru-gothic: var(--font-toge-maru-gothic, var(--font-geist-sans));
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-gotham: var(--font-gotham, var(--font-geist-sans));
+  --font-gotham-bold: var(--font-gotham-bold, var(--font-geist-sans));
+  --font-samasan-donokun-bold: var(--font-samasan-donokun-bold, var(--font-geist-sans));
   
 }
 
@@ -26,4 +34,6 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  font-family: "gotham", "Samasan Donokun", "Toge Maru Gothic", var(--font-sans), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
 }
+
