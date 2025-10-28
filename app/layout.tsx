@@ -51,6 +51,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} ${TogeMaruGothic.variable} ${SamasanDonokun.variable}`}>
+      <head>
+      </head>
       <TypekitLoader />
       <body className="antialiased">{children}</body>
     </html>
