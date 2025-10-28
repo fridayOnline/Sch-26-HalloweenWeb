@@ -50,7 +50,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} ${TogeMaruGothic.variable} ${SamasanDonokun.variable}`}>
-      <link rel="stylesheet" href="https://use.typekit.net/mye5agk.css"></link>
+      <head>
+        <meta charSet="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <title>怪盗Rからの挑戦状</title>
+      </head>
       <body className="antialiased">{children}</body>
     </html>
   );

@@ -1,5 +1,6 @@
 "use client";
 import Image from 'next/image';
+import Game from '../app/components/game';
 
 
 export default function Home() {
@@ -18,7 +19,7 @@ export default function Home() {
 
         <div className='flex flex-row w-full gap-4 mx-4 justify-center-safe'>
           <div className='w-full'>
-            <p>webGLをここに</p>
+            <Game />
             <div className='text-[#F2F3FF] font-toge-maru-gothic text-[36px] w-full font-black'>
               <h3>操作方法</h3>
               <p>移動：<span className='font-gotham'>WASD</span>キー（ <span className='font-gotham'>or</span> 矢印キー）</p>
@@ -26,7 +27,12 @@ export default function Home() {
             </div>
           </div>
           <div className='bg-[#7D56E5] rounded-md flex flex-col items-center-safe p-4'>
-            <h3 className='text-[#F2F3FF] font-toge-maru-gothic text-[40px] font-bold'>提供写真</h3>
+            <div className='flex flex-row  w-full justify-center-safe items-center'>
+              <Image src="/img/komyu2.png" alt="Halloween 25 Lit Logo" width={100} height={50} />
+              <h3 className='text-[#F2F3FF] font-toge-maru-gothic text-[36px] font-bold'>提供写真</h3>
+              <Image src="/img/komyu1.png" alt="Halloween 25 Lit Logo" width={100} height={50} />
+            </div>
+            
             <div className='flex flex-col justify-start overflow-y-scroll flex-nowrap max-h-[850px]'>
               <Image src="/photo1.jpg" alt="Photo 1" width={300} height={400} className='rounded-md bg-amber-50 m-4'/>
               <Image src="/photo2.jpg" alt="Photo 2" width={300} height={400} className='rounded-md bg-amber-50 m-4'/>
