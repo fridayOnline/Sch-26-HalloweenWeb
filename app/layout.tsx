@@ -1,3 +1,5 @@
+
+
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import localFont from 'next/font/local';
@@ -18,8 +20,6 @@ const geistMono = Geist_Mono({
 const SamasanDonokun = localFont({
   src: [
     { path: '../public/fonts/SamasanDonokun-01.ttf', weight: '100', style: 'normal' },
-    { path: '../public/fonts/SamasanDonokun-02.ttf', weight: '200', style: 'normal' },
-    { path: '../public/fonts/SamasanDonokun-03.ttf', weight: '300', style: 'normal' }
   ],
   variable: '--font-samasan-donokun',
 });
