@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Game from '../app/components/game';
 import YoutubeModal from './components/YoutubeModal';
 import React, { useState } from 'react';
+import Shape from './components/shape';
 
 export default function Home() {
   // ポップアップの開閉状態を管理
@@ -15,7 +16,8 @@ export default function Home() {
   const closeModal = () => setIsOpen(false);
 
   return (
-      <main className='flex  flex-col justify-center items-center gap-8 p-4 bg-[#011051] px-16'>
+      <main >
+        <div className='flex  flex-col justify-center items-center gap-8 p-4 bg-[#011051] px-16'>
         <div className='w-full my-32 flex justify-center'>
           <Image src="/img/logo.png" alt="Halloween 25 Lit" width={800} height={600} />
         </div>
@@ -101,6 +103,10 @@ export default function Home() {
           <p>謎：むた</p>
           <p><span className='font-gotham'>MC</span>：りょうさん</p>
         </div>
+      
+      </div>
+      <Shape />
       </main>
+      
   );
 }
