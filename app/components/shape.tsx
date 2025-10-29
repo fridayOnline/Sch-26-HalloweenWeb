@@ -112,7 +112,7 @@ export default function Shape() {
             ref={canvasRef} 
             id="canvas" 
             className="w-full  h-[300px] aspect-square"
-            aria-label="ベジェ曲線で描かれた赤いハート"
+            aria-label="坂道"
           />
         </div>
     </div>
