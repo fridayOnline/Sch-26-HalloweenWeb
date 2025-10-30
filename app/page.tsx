@@ -5,9 +5,11 @@ import YoutubeModal from './components/YoutubeModal';
 import React, { useState } from 'react';
 import Shape from './components/shape';
 import { shadow } from 'three/tsl';
+import type { MouseEvent } from 'react';
+
 // import{ Button }from '@mui/material'
 
-const StarIcon = ({ style }) => (
+const StarIcon: React.FC<{ style?: React.CSSProperties }> = ({ style }) => (
   <svg 
     className="absolute text-[#FBF835] twinkle-star" // アニメーション用のクラスを追加
     style={style} // 位置やサイズ、遅延をランダムに適用
@@ -21,7 +23,31 @@ const StarIcon = ({ style }) => (
   </svg>
 );
 
+
+// 2. 画像オブジェクトの型を定義
+interface ImageItem {
+  src: string;
+  alt: string;
+}
+
 export default function Home() {
+
+// 4. 選択された画像の「src」を管理するstate
+  // (初期値 null = 何も選択されていない)
+  // 4. 選択された画像の「src」を管理するstate
+  // (初期値 null = 何も選択されていない)
+// 4. useState に型 (<string | null>) を指定
+  const [selectedImageSrc, setSelectedImageSrc] = useState<string | null>(null);
+
+  // 5. 'src' パラメータに string 型を指定
+  const openImageModal = (src: string) => {
+    setSelectedImageSrc(src);
+  };
+
+  const closeImageModal = () => {
+    setSelectedImageSrc(null);
+  };
+
    // ポップアップの開閉状態を管理
   const [isOpen, setIsOpen] = useState(false);
 
@@ -33,9 +59,13 @@ export default function Home() {
   };
 
   // ポップアップを閉じる関数
-  const closeModal = (e) => {
+  interface CloseModal {
+    (e?: React.MouseEvent<HTMLElement>): void;
+  }
+
+  const closeModal: CloseModal = (e) => {
     // イベントの伝播を停止（ボタンクリックが背景のクリックとして扱われないように）
-    e.stopPropagation(); 
+    e?.stopPropagation();
     setIsOpen(false);
     document.body.style.overflow = 'auto';
   };
@@ -72,68 +102,109 @@ export default function Home() {
           will-change: opacity; /* アニメーションのパフォーマンスを最適化 */
         }
       `}</style>
-        <div className='flex  flex-col justify-center items-center bg-[#011051] '
-         
-        >
+        <div className='flex  flex-col justify-center items-center bg-[#011051] '>
         <div className='w-full  flex justify-center bg-gradient-to-b from-[#5FFAA1] via-[#011051] to-[#011051] '>
-          <Image src="/img/logo.png" alt="Halloween 25 Lit" width={800} height={600} className='z-10  m-auto' />
+          <Image src="/img/logo.png" alt="Halloween 25 Lit" width={1600} height={900} className='z-10  m-auto h-full w-full px-20' />
           {stars}
           
         </div>
-        <div className='flex flex-row w-full gap-8 justify-center-safe px-16 '>
-          <div className='w-full'>
-            <Game  
-              
-            />
-            <div className='text-[#F2F3FF] font-toge-maru-gothic text-[36px] w-full font-black my-4'>
-              <h3>操作方法</h3>
-              <p>移動：<span className='font-gotham'>WASD</span>キー（ <span className='font-gotham'>or</span> 矢印キー）</p>
-              <p>視点：マウス</p>
-            </div>
+        
+        <div className='flex flex-row w-full gap-8 justify-center-safe px-16 pb-4'>
+          <div className='w-full aspect-video mt-24'>
+            <Game />
+            
           </div>
-        <div className='flex flex-col justify-center'>
-         <button onClick={openModal} className="btn btn-primary cursor-pointer text-[36px] font-bold  border-4 border-[#5FFAA1] shadow-inner  shadow-[#5FFAA1]/50 rounded-lg font-toge-maru-gothic py-4  mb-4 items-center flex flex-col  hover:bg-[#5FFAA1]/30 transition"
-         style={{
-          boxShadow: '0 0 20px #5FFAA1,inset 0 0 20px #5FFAA1'
-         }}
-        >
-          {isOpen && (
-        // モーダルのオーバーレイ（背景）
-        <div 
-          className="fixed inset-0 bg-black/90 flex items-center justify-center z-50 p-4"
-          onClick={(e) => {
-            // 背景クリックで閉じる
+        <div className='flex flex-col justify-start '>
+         <button 
+        onClick={openModal} 
+        // ★変更: 'justify-end' を 'justify-center' に変更して中央揃えに
+        className="btn btn-primary flex justify-center cursor-pointer text-[28px] font-bold  border-4 border-[#5FFAA1] shadow-inner  shadow-[#5FFAA1]/50 rounded-lg font-toge-maru-gothic p-4  mb-4 hover:bg-[#5FFAA1]/30 transition"
+        style={{
+         boxShadow: '0 0 20px #5FFAA1,inset 0 0 20px #5FFAA1'
+        }}
+      >
+        {isOpen && (
+       // モーダルのオーバーレイ（背景）
+       <div 
+         className="fixed inset-0 bg-black/90 flex items-center justify-center z-50 p-4"
+         onClick={(e) => {
+           // 背景クリックで閉じる
            
-            if (e.target === e.currentTarget) {
-              closeModal(e);
-            }
-          }}
-        >
-          {/* モーダルのコンテンツエリア */}
-          <div style={{
-            position: 'relative',
-            // ここに元のYouTubeEmbedコンポーネントを配置
-          }}>
-            <YoutubeModal />
-            <button
-              onClick={closeModal}
-              className="absolute -top-4 right-48 border-4 border-[#5FFAA1] text-[#5FFAA1] rounded-full w-16 h-16 flex items-center justify-center font-bold text-4xl shadow-lg cursor-pointer z-50 hover:bg-[#5FFAA1]/30 transition"
-            >
-              &times;
-            </button>
-          </div>
-        </div>
-      )}
-          <div className='flex flex-row justify-center items-center gap-4'>
-            <Image src="/img/play.svg" alt="Play Icon" width={32} height={32} className='absolute left-32 '/>
-            <p className='text-[#5FFAA1]'
+           if (e.target === e.currentTarget) {
+             closeModal(e);
+           }
+         }}
+       >
+         {/* モーダルのコンテンツエリア */}
+         <div
+  // style={{ position: 'relative' }} の代わりに
+  // 以下のクラスで画面中央に固定します
+  className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-40"
+>
+  <YoutubeModal />
+  <button
+    onClick={closeModal}
+    // 'absolute' は親の 'fixed' を基準にするため、
+    // ボタンの位置は変わりません
+    className="absolute -top-4 right-48 border-4 border-[#5FFAA1] text-[#5FFAA1] rounded-full w-16 h-16 flex items-center justify-center font-bold text-4xl shadow-lg cursor-pointer z-50 hover:bg-[#5FFAA1]/30 transition"
+  >
+    &times;
+  </button>
+         </div>
+       </div>
+     )}
+        
+        {/* ボタンのコンテンツ (アイコン + テキスト) */}
+        <div className='flex flex-row justify-center items-center'>
+          <svg
+            id="play-icon"
+            width="48"
+            height="48"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
+            // ★変更: textShadowを削除し、Tailwindのdrop-shadowクラスを追加
+            className='text-[#5FFAA1] drop-shadow-[0px_0px_4px_#5FFAA1]'
+            // style={{ ... }} は削除 (もしくはfilterプロパティに変更)
+          >
+            <path d="M8 5V19L19 12L8 5Z" />
+          </svg>
+          <p className='text-[#5FFAA1]'
              style={{
-              textShadow: '0px 0px 4px #5FFAA1'
+               textShadow: '0px 0px 4px #5FFAA1' // テキストは textShadow のままでOK
              }}
-            >動画を再生</p>
-          </div>
+          >
+            動画を再生
+          </p>
+        </div>
         </button>
-          <div className='border-4 border-[#7D56E5] rounded-md flex flex-col items-center-safe p-4 pb-8 pr-4'
+        {/* 1. 親divに 'flex flex-col' を追加 
+   (コンテナの高さが定義されていない場合、'h-full' などが必要な場合があります) */}
+<div className='flex flex-col h-full'> 
+
+  {/* 2. テキストブロックに 'flex-grow' を追加 (残りのスペースを埋める) */}
+  <div className='text-[#F2F3FF] font-toge-maru-gothic text-[24px] w-full font-black ju flex-grow'>
+    <h3>操作方法</h3>
+    <p>移動：<span className='font-gotham'>WASD</span>キー（ <span className='font-gotham'>or</span> 矢印キー）</p>
+    <p>視点：マウス</p>
+  </div>
+
+  {/* 3. 画像のラッパーdivに 'flex justify-end' を追加 (中身を右寄せ) */}
+  <div className="flex justify-end">
+    <Image 
+      src="/img/kabotya.png" 
+      alt="Operation Guide" 
+      width={200} 
+      height={50} 
+      className='h-auto w-24' 
+    />
+  </div>
+
+</div>
+        </div>
+        </div>
+        <div className='px-16 w-full'>
+        <div className='border-4 border-[#7D56E5] rounded-md flex flex-col items-center-safe p-4 pb-8 pr-4 w-full '
           style={{
               boxShadow: '0 0 20px #7D56E5,inset 0 0 20px #7D56E5'
              }}
@@ -143,17 +214,58 @@ export default function Home() {
               <h3 className='text-[#F2F3FF] font-toge-maru-gothic text-[36px] font-bold'>提供写真</h3>
               <Image src="/img/komyu1.png" alt="Halloween 25 Lit Logo" width={100} height={50} />
             </div>
-            
-            <div className='flex flex-col justify-start overflow-y-scroll flex-nowrap max-h-[850px]'>
-              <Image src="/photo1.jpg" alt="Photo 1" width={300} height={400} className='rounded-md bg-amber-50 m-4'/>
-              <Image src="/photo2.jpg" alt="Photo 2" width={300} height={400} className='rounded-md bg-amber-50 m-4'/>
-              <Image src="/photo3.jpg" alt="Photo 3" width={300} height={400} className='rounded-md bg-amber-50 m-4'/>
-              <Image src="/photo4.jpg" alt="Photo 4" width={300} height={400} className='rounded-md bg-amber-50 m-4'/>
-              <Image src="/photo5.jpg" alt="Photo 5" width={300} height={400} className='rounded-md bg-amber-50 m-4'/>
-            </div>
+              <div className='flex flex-row justify-start overflow-x-scroll w-full px-16 pt-4 pb-8'>
+                <div className='m-4 mx-8 '  >
+                  <Image src="/img/photo1.jpg" alt="Photo 1" width={350} height={250} onClick={() => openImageModal("/img/photo1.jpg")} className='rounded-md bg-white m-4 rotate-6 pt-4 pb-8 px-4 cursor-pointer'/>
+                  <div className='w-[350px] h-auto'></div>
+                </div>
+                <div className='m-4 mx-8 ' >
+                  <Image src="/img/photo2.jpg" alt="Photo 2" width={350} height={250} onClick={() => openImageModal("/img/photo2.jpg")} className='rounded-md bg-white m-4 -rotate-6 pt-4 pb-8 px-4 cursor-pointer'/>
+                  <div className='w-[350px] h-auto'></div>
+                </div>
+                <div className='m-4 mx-8 cursor-pointer' >
+                  <Image src="/img/photo3.jpg" alt="Photo 3" width={350} height={250} onClick={() => openImageModal("/img/photo3.jpg")} className='rounded-md bg-white m-4 rotate-6 pt-4 pb-8 px-4 cursor-pointer'/>
+                  <div className='w-[350px] h-auto'></div>
+                </div>
+                <div className='m-4 mx-8 ' >
+                  <Image src="/img/photo4.jpg" alt="Photo 4" width={350} height={250} onClick={() => openImageModal("/img/photo4.jpg")} className='rounded-md bg-white m-4 -rotate-6 pt-4 pb-8 px-4 cursor-pointer'/>
+                  <div className='w-[350px] h-auto'></div>
+                </div>
+                <div className='m-4 mx-8 ' >
+                  <Image src="/img/photo5.jpg" alt="Photo 5" width={350} height={250} onClick={() => openImageModal("/img/photo5.jpg")} className='rounded-md bg-white m-4 rotate-6 pt-4 pb-8 px-4 cursor-pointer'/>
+                  <div className='w-[350px] h-auto'></div>
+                  
+                </div>
+              </div>
+              {selectedImageSrc && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70"
+          onClick={closeImageModal} // 背景クリックで閉じる
+        >
+          {/* モーダル本体（画像コンテナ）。背景へのクリック伝播を停止 */}
+          <div 
+            className="relative w-[90vw] max-w-[1000px] aspect-video"
+            onClick={(e) => e.stopPropagation()} // 画像クリックで閉じないようにする
+          >
+            <Image 
+              src={selectedImageSrc} // 11. 選択された画像の src を表示
+              alt="Popup Image" // alt も動的に変更可能
+              fill
+              className='object-contain rounded-md'
+            />
           </div>
+
+          {/* 閉じるボタン */}
+          <button
+            onClick={closeImageModal}
+            className="absolute top-6 right-6 border-4  border-[#7D56E5] text-[#7D56E5] rounded-full w-16 h-16 flex items-center justify-center font-bold text-4xl shadow-lg cursor-pointer z-50 hover:bg-[#7D56E5]/30 transition"
+          >
+            &times;
+          </button>
         </div>
-        </div>
+      )}
+          </div>
+          </div>
         <div className='text-[28px] flex flex-col items-start text-[#F2F3FF] font-toge-maru-gothic font-regular w-full pl-16 pt-16'>
           <p>ディレクター：ピナ</p>
           <p>ゲーム制作：さとたい ぺんぎん アンビ</p>

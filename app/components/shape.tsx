@@ -66,7 +66,12 @@ export default function Shape() {
     // 6. Z (パスを閉じる)
     ctx.closePath();
     ctx.fill();
+
+
+
   };
+
+
 
   useEffect(() => {
     const canvas = canvasRef.current;

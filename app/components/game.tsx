@@ -11,13 +11,13 @@ const unityContext = new UnityContext({
 
 function Game() {
   return (
-    <div  className="border-2 border-[#5FFAA1] mt-32"
+    <div  className="border-2 border-[#5FFAA1] w-full aspect-video"
     style={{
           boxShadow: '0 0 50px #5FFAA1'
          }}
     >
 
-      <Unity unityContext={unityContext} className="w-full bg-grey"/>
+      <Unity unityContext={unityContext} className="w-full aspect-video bg-grey"/>
     </div>
   );
 }
