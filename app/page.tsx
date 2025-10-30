@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 import Shape from './components/shape';
 import { shadow } from 'three/tsl';
 import type { MouseEvent } from 'react';
+import BottomStars from './components/BottomStars';
 
 // import{ Button }from '@mui/material'
 
@@ -13,13 +14,13 @@ const StarIcon: React.FC<{ style?: React.CSSProperties }> = ({ style }) => (
   <svg 
     className="absolute text-[#FBF835] twinkle-star" // アニメーション用のクラスを追加
     style={style} // 位置やサイズ、遅延をランダムに適用
-    width="24" 
-    height="24" 
+    width="36" 
+    height="36" 
     viewBox="0 0 24 24" 
     fill="currentColor" 
     xmlns="http://www.w3.org/2000/svg"
   >
-    <path d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z"/>
+    <path d="M12 2 L15 9 L22 12 L15 15 L12 22 L9 15 L2 12 L9 9 Z"/>
   </svg>
 );
 
@@ -80,7 +81,7 @@ export default function Home() {
   const stars = React.useMemo(() => 
     Array.from({ length: numStars }, (_, i) => {
       const style = {
-        top: `${Math.random() * 50}%`,
+        top: `${Math.random() * 80}%`,
         left: `${Math.random() * 100}%`,
         transform: `scale(${Math.random() * 0.5 + 0.5}) rotate(${Math.random() * 360}deg)`,
         animationDelay: `${Math.random() * 5}s`, // 瞬きのタイミングをずらす
@@ -266,19 +267,34 @@ export default function Home() {
       )}
           </div>
           </div>
-        <div className='text-[28px] flex flex-col items-start text-[#F2F3FF] font-toge-maru-gothic font-regular w-full pl-16 pt-16'>
-          <p>ディレクター：ピナ</p>
-          <p>ゲーム制作：さとたい ぺんぎん アンビ</p>
-          <p>デザイナー：りっちゃん かめさん みるぷ むた</p>
-          <p><span className='font-gotham'>WEB</span>制作：あーる</p>
-          <p>バーチャル背景制作：きゅる にとりん</p>
-          <p>映像制作：ゆきま こーた にとりん</p>
-          <p>謎：むた</p>
-          <p><span className='font-gotham'>MC</span>：りょうさん</p>
-        </div>
+
+       {/* 親要素 (基準) */}
+<div className='w-full relative '>
+  
+  {/* 1. 背景 (星) */}
+  {/* absolute で親いっぱいに広げ、z-0 で背面に配置 */}
+  <div className="absolute inset-0 z-0">
+    <BottomStars />
+  </div>
+
+  {/* 2. 前景 (テキスト) */}
+  {/* relative を追加し、z-10 で手前に配置 */}
+  <div className='w-full relative text-[28px] flex flex-col items-start text-[#F2F3FF] font-toge-maru-gothic font-regular pl-16 pt-16 z-10'>
+    <p>ディレクター：ピナ</p>
+    <p>ゲーム制作：さとたい ぺんぎん アンビ</p>
+    <p>デザイナー：りっちゃん かめさん みるぷ むた</p>
+    <p><span className='font-gotham'>WEB</span>制作：あーる</p>
+    <p>バーチャル背景制作：きゅる にとりん</p>
+    <p>映像制作：ゆきま こーた にとりん</p>
+    <p>謎：むた</p>
+    <p><span className='font-gotham'>MC</span>：りょうさん</p>
+  </div>
+  
+  {/* BottomStars は上記でラップしたため、ここからは削除 */}
+</div>
       
       </div>
-      <Shape />
+     <Shape />
       </main>
       
   );
