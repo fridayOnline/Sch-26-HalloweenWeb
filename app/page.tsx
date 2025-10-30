@@ -81,7 +81,7 @@ export default function Home() {
   const stars = React.useMemo(() => 
     Array.from({ length: numStars }, (_, i) => {
       const style = {
-        top: `${Math.random() * 70}%`,
+        top: `${Math.random() * 60}%`,
         left: `${Math.random() * 100}%`,
         transform: `scale(${Math.random() * 0.5 + 0.5}) rotate(${Math.random() * 360}deg)`,
         animationDelay: `${Math.random() * 5}s`, // 瞬きのタイミングをずらす
@@ -105,21 +105,25 @@ export default function Home() {
       `}</style>
         <div className='flex  flex-col justify-center items-center bg-[#011051] '>
         <div className='w-full  flex justify-center bg-gradient-to-b from-[#5FFAA1] via-[#011051] to-[#011051] '>
-          <Image src="/img/logo.svg" alt="Halloween 25 Lit" width={1600} height={900} className='z-10  m-auto h-full w-full px-20 py-20' />
+          <Image src="/img/logo.svg" alt="Halloween 25 Lit" width={1600} height={900} className='z-10  m-auto h-full w-[60%] py-24' />
           {stars}
           
         </div>
         
         <div className='flex flex-row w-full gap-8 justify-center-safe px-16 pb-4'>
-          <div className='w-full aspect-video mt-24'>
+          <div className='w-full aspect-video mt-28'>
             <Game />
-            
+            <div className='text-[#F2F3FF] font-toge-maru-gothic text-[36px] w-full font-black ju flex-grow  pt-4 f'>
+    <h3>操作方法</h3>
+    <p>移動：<span className='font-gotham'>WASD</span>キー（ <span className='font-gotham'>or</span> 矢印キー）</p>
+    <p>視点：マウス</p>
+  </div>
           </div>
-        <div className='flex flex-col justify-start '>
+        <div className='flex flex-col justify-start w-[30%]'>
          <button 
         onClick={openModal} 
         // ★変更: 'justify-end' を 'justify-center' に変更して中央揃えに
-        className="btn btn-primary flex justify-center cursor-pointer text-[28px] font-bold  border-4 border-[#5FFAA1] shadow-inner  shadow-[#5FFAA1]/50 rounded-lg font-toge-maru-gothic p-4  mb-4 hover:bg-[#5FFAA1]/30 transition"
+        className="btn btn-primary flex justify-center cursor-pointer text-[28px] font-bold  border-4 border-[#5FFAA1] shadow-inner  shadow-[#5FFAA1]/50 rounded-lg font-toge-maru-gothic py-4   hover:bg-[#5FFAA1]/30 transition"
         style={{
          boxShadow: '0 0 20px #5FFAA1,inset 0 0 20px #5FFAA1'
         }}
@@ -133,16 +137,12 @@ export default function Home() {
           {/* モーダル本体（画像コンテナ）。背景へのクリック伝播を停止 */}
           <div 
             className="relative w-[90vw] max-w-[1000px] aspect-video  "
-            onClick={(e) => {
-           // 背景クリックで閉じる
-           
-           if (e.target === e.currentTarget) {
-             closeModal(e);
-           }
-         }} // 画像クリックで閉じないようにする
+            onClick={(e) => e.stopPropagation()}
           >
             <YoutubeModal />
+            
           </div>
+          
 
           {/* 閉じるボタン */}
           <button
@@ -181,59 +181,37 @@ export default function Home() {
         </button>
         {/* 1. 親divに 'flex flex-col' を追加 
    (コンテナの高さが定義されていない場合、'h-full' などが必要な場合があります) */}
-<div className='flex flex-col h-full'> 
-
-  {/* 2. テキストブロックに 'flex-grow' を追加 (残りのスペースを埋める) */}
-  <div className='text-[#F2F3FF] font-toge-maru-gothic text-[24px] w-full font-black ju flex-grow'>
-    <h3>操作方法</h3>
-    <p>移動：<span className='font-gotham'>WASD</span>キー（ <span className='font-gotham'>or</span> 矢印キー）</p>
-    <p>視点：マウス</p>
-  </div>
-
-  {/* 3. 画像のラッパーdivに 'flex justify-end' を追加 (中身を右寄せ) */}
-  <div className="flex justify-end">
-    <Image 
-      src="/img/kabotya.png" 
-      alt="Operation Guide" 
-      width={200} 
-      height={50} 
-      className='h-auto w-24' 
-    />
-  </div>
-
-</div>
-        </div>
-        </div>
-        <div className='px-16 w-full'>
-        <div className='border-4 border-[#7D56E5] rounded-md flex flex-col items-center-safe p-4 pb-8 pr-4 w-full '
+<div className='flex flex-col grow'> 
+  <div className='py-4 w-full h-full'>
+        <div className='border-4 border-[#7D56E5] rounded-md flex flex-col items-center-safe p-2 pb-8  w-full h-[750px]  overflow-hidden'
           style={{
               boxShadow: '0 0 20px #7D56E5,inset 0 0 20px #7D56E5'
              }}
           >
             <div className='flex flex-row  w-full justify-center-safe items-center'>
               <Image src="/img/komyu2.png" alt="Halloween 25 Lit Logo" width={100} height={50} />
-              <h3 className='text-[#F2F3FF] font-toge-maru-gothic text-[36px] font-bold'>提供写真</h3>
+              <h3 className='text-[#F2F3FF] font-toge-maru-gothic text-[28px] font-bold'>提供写真</h3>
               <Image src="/img/komyu1.png" alt="Halloween 25 Lit Logo" width={100} height={50} />
             </div>
-              <div className='flex flex-row justify-start overflow-x-scroll w-full px-16 pt-4 pb-8'>
-                <div className='m-4 mx-8 '  >
-                  <Image src="/img/photo1.jpg" alt="Photo 1" width={350} height={250} onClick={() => openImageModal("/img/photo1.jpg")} className='rounded-md bg-white m-4 rotate-6 pt-4 pb-8 px-4 cursor-pointer'/>
+              <div className='flex flex-col grow justify-start overflow-y-scroll w-full pt-4 pb-8'>
+                <div className='m-4 pr-4 '  >
+                  <Image src="/img/photo1.jpg" alt="Photo 1" width={350} height={250} onClick={() => openImageModal("/img/photo1.jpg")} className='rounded-md bg-white m-4 rotate-6 pt-4 pb-8 px-2 cursor-pointer'/>
                   <div className='w-[350px] h-auto'></div>
                 </div>
-                <div className='m-4 mx-8 ' >
-                  <Image src="/img/photo2.jpg" alt="Photo 2" width={350} height={250} onClick={() => openImageModal("/img/photo2.jpg")} className='rounded-md bg-white m-4 -rotate-6 pt-4 pb-8 px-4 cursor-pointer'/>
+                <div className='m-4  pr-4' >
+                  <Image src="/img/photo1.jpg" alt="Photo 2" width={350} height={250} onClick={() => openImageModal("/img/photo2.jpg")} className='rounded-md bg-white m-4 -rotate-6 pt-4 pb-8 px-2 cursor-pointer'/>
                   <div className='w-[350px] h-auto'></div>
                 </div>
-                <div className='m-4 mx-8 cursor-pointer' >
-                  <Image src="/img/photo3.jpg" alt="Photo 3" width={350} height={250} onClick={() => openImageModal("/img/photo3.jpg")} className='rounded-md bg-white m-4 rotate-6 pt-4 pb-8 px-4 cursor-pointer'/>
+                <div className='m-4  pr-4' >
+                  <Image src="/img/photo1.jpg" alt="Photo 3" width={350} height={250} onClick={() => openImageModal("/img/photo3.jpg")} className='rounded-md bg-white m-4 rotate-6 pt-4 pb-8 px-2 cursor-pointer'/>
                   <div className='w-[350px] h-auto'></div>
                 </div>
-                <div className='m-4 mx-8 ' >
-                  <Image src="/img/photo4.jpg" alt="Photo 4" width={350} height={250} onClick={() => openImageModal("/img/photo4.jpg")} className='rounded-md bg-white m-4 -rotate-6 pt-4 pb-8 px-4 cursor-pointer'/>
+                <div className='m-4  pr-4' >
+                  <Image src="/img/photo1.jpg" alt="Photo 4" width={350} height={250} onClick={() => openImageModal("/img/photo4.jpg")} className='rounded-md bg-white m-4 -rotate-6 pt-4 pb-8 px-2 cursor-pointer'/>
                   <div className='w-[350px] h-auto'></div>
                 </div>
-                <div className='m-4 mx-8 ' >
-                  <Image src="/img/photo5.jpg" alt="Photo 5" width={350} height={250} onClick={() => openImageModal("/img/photo5.jpg")} className='rounded-md bg-white m-4 rotate-6 pt-4 pb-8 px-4 cursor-pointer'/>
+                <div className='m-4 pr-4' >
+                  <Image src="/img/photo1.jpg" alt="Photo 5" width={350} height={250} onClick={() => openImageModal("/img/photo5.jpg")} className='rounded-md bg-white m-4 rotate-6 pt-4 pb-8 px-2 cursor-pointer'/>
                   <div className='w-[350px] h-auto'></div>
                   
                 </div>
@@ -267,6 +245,23 @@ export default function Home() {
       )}
           </div>
           </div>
+
+
+  {/* <div className="flex justify-end">
+    <Image 
+      src="/img/kabotya.png" 
+      alt="Operation Guide" 
+      width={200} 
+      height={50} 
+      className='h-auto w-24' 
+    />
+  </div> */}
+
+</div>
+        </div>
+        </div>
+        
+        
 
        {/* 親要素 (基準) */}
 <div className='w-full relative '>
