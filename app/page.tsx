@@ -104,7 +104,7 @@ export default function Home() {
       `}</style>
         <div className='flex  flex-col justify-center items-center bg-[#011051] '>
         <div className='w-full  flex justify-center bg-gradient-to-b from-[#5FFAA1] via-[#011051] to-[#011051] '>
-          <Image src="/img/logo.png" alt="Halloween 25 Lit" width={1600} height={900} className='z-10  m-auto h-full w-full px-20' />
+          <Image src="/img/logo.png" alt="Halloween 25 Lit" width={1600} height={900} className='z-10  m-auto h-full w-full px-20 py-20' />
           {stars}
           
         </div>
@@ -123,36 +123,36 @@ export default function Home() {
          boxShadow: '0 0 20px #5FFAA1,inset 0 0 20px #5FFAA1'
         }}
       >
-        {isOpen && (
-       // モーダルのオーバーレイ（背景）
+
+     {isOpen && (
        <div 
-         className="fixed inset-0 bg-black/90 flex items-center justify-center z-50 p-4"
-         onClick={(e) => {
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70"
+          onClick={closeModal} // 背景クリックで閉じる
+        >
+          {/* モーダル本体（画像コンテナ）。背景へのクリック伝播を停止 */}
+          <div 
+            className="relative w-[90vw] max-w-[1000px] aspect-video  "
+            onClick={(e) => {
            // 背景クリックで閉じる
            
            if (e.target === e.currentTarget) {
              closeModal(e);
            }
-         }}
-       >
-         {/* モーダルのコンテンツエリア */}
-         <div
-  // style={{ position: 'relative' }} の代わりに
-  // 以下のクラスで画面中央に固定します
-  className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-40"
->
-  <YoutubeModal />
-  <button
-    onClick={closeModal}
-    // 'absolute' は親の 'fixed' を基準にするため、
-    // ボタンの位置は変わりません
-    className="absolute -top-4 right-48 border-4 border-[#5FFAA1] text-[#5FFAA1] rounded-full w-16 h-16 flex items-center justify-center font-bold text-4xl shadow-lg cursor-pointer z-50 hover:bg-[#5FFAA1]/30 transition"
-  >
-    &times;
-  </button>
-         </div>
-       </div>
+         }} // 画像クリックで閉じないようにする
+          >
+            <YoutubeModal />
+          </div>
+
+          {/* 閉じるボタン */}
+          <button
+            onClick={closeModal}
+            className="absolute top-6 right-6 border-4  border-[#5FFAA1] text-[#5FFAA1] rounded-full w-16 h-16 flex items-center justify-center font-bold text-4xl shadow-lg cursor-pointer z-50 hover:bg-[#5FFAA1]/30 transition"
+          >
+            &times;
+          </button>
+        </div>
      )}
+        
         
         {/* ボタンのコンテンツ (アイコン + テキスト) */}
         <div className='flex flex-row justify-center items-center'>
