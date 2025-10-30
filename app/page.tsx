@@ -81,7 +81,7 @@ export default function Home() {
   const stars = React.useMemo(() => 
     Array.from({ length: numStars }, (_, i) => {
       const style = {
-        top: `${Math.random() * 60}%`,
+        top: `${Math.random() * 90}%`,
         left: `${Math.random() * 100}%`,
         transform: `scale(${Math.random() * 0.5 + 0.5}) rotate(${Math.random() * 360}deg)`,
         animationDelay: `${Math.random() * 5}s`, // 瞬きのタイミングをずらす
@@ -104,15 +104,42 @@ export default function Home() {
         }
       `}</style>
         <div className='flex  flex-col justify-center items-center bg-[#011051] '>
-        <div className='w-full  flex justify-center bg-gradient-to-b from-[#5FFAA1] via-[#011051] to-[#011051] '>
-          <Image src="/img/logo.svg" alt="Halloween 25 Lit" width={1600} height={900} className='z-10  m-auto h-full w-[60%] py-24' />
+        <div className='w-full  flex justify-center bg-gradient-to-b from-[#5FFAA1] via-[#011051] to-[#011051] h-screen'>
+          <Image src="/img/logo.svg" alt="Halloween 25 Lit" width={1600} height={900} className='z-10  m-auto h-full w-[60%] py-24 ' />
           {stars}
           
         </div>
         
-        <div className='flex flex-row w-full gap-8 justify-center-safe px-16 pb-4'>
-          <div className='w-full aspect-video mt-28'>
+        <div className='flex flex-row w-full gap-8 justify-center-safe px-16 pb-4 '>
+          <div className='w-full aspect-video mt-28 '>
+            <div className='relative  w-full  aspect-video  '>
+            <div className='absolute  w-full h-full z-20'>
             <Game />
+            </div>
+            
+            <Image 
+              src="/img/background.png" 
+              alt="Game Placeholder" 
+              width={800} 
+              height={450} 
+              className='absolute inset-0 w-full h-full object-contain rounded-md z-0' 
+            />
+  <Image 
+    src="/img/loading.png" 
+    alt="Loading" 
+    width={30} 
+    height={30} 
+    className='
+      absolute 
+      z-10 
+      top-11/12 
+      left-1/2
+      -translate-x-1/2 
+      -translate-y-1/2 
+      animate-spin
+    ' 
+  />
+  </div>     
             <div className='text-[#F2F3FF] font-toge-maru-gothic text-[36px] w-full font-black ju flex-grow  pt-4 f'>
     <h3>操作方法</h3>
     <p>移動：<span className='font-gotham'>WASD</span>キー（ <span className='font-gotham'>or</span> 矢印キー）</p>
@@ -139,8 +166,13 @@ export default function Home() {
             className="relative w-[90vw] max-w-[1000px] aspect-video  "
             onClick={(e) => e.stopPropagation()}
           >
-            <YoutubeModal />
             
+            <video 
+              src="/movie/test.mp4" // 11. 選択された動画の src を表示
+              className='object-contain rounded-md'
+              controls
+            />
+
           </div>
           
 
