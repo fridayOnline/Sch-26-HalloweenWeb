@@ -26,7 +26,7 @@ export default function Shape() {
     // ... (波形の描画パス: moveTo, bezierCurveTo, ...) ...
     ctx.beginPath();
     ctx.moveTo(sx(0), sy(300));
-    ctx.lineTo(sx(0), sy(220)); 
+    ctx.lineTo(sx(0), sy(210)); 
     ctx.bezierCurveTo(
       sx(400), sy(200), 
       sx(750), sy(0), 
@@ -139,36 +139,33 @@ const drawImageOnCanvas3 = (
 
     // 5. 波と画像をまとめて再描画する関数
     const redrawAll = () => {
-      if (!canvas || !ctx) {
-        // キャンバスやコンテキストが準備できていない場合は何もしない
-        return;
-      }
-
-      // すべての画像オブジェクトが存在し、かつロード完了していることを確認
-      if (
-        !imageRef1.current ||
-        !imageRef2.current ||
-        !imageRef3.current ||
-        !imageRef1.current.complete ||
-        !imageRef2.current.complete ||
-        !imageRef3.current.complete
-      ) {
+      if (!canvas || !ctx || !imageRef1.current || !imageRef1.current.complete) {
         // キャンバスや画像が準備できていない場合は何もしない
         // (img.complete は画像がロード完了しているかチェック)
-        return;
+        return; 
       }
-      
+      if (!canvas || !ctx || !imageRef2.current || !imageRef2.current.complete) {
+        // キャンバスや画像が準備できていない場合は何もしない
+        // (img.complete は画像がロード完了しているかチェック)
+        return; 
+      }
+      if (!canvas || !ctx || !imageRef3.current || !imageRef3.current.complete) {
+        // キャンバスや画像が準備できていない場合は何もしない
+        // (img.complete は画像がロード完了しているかチェック)
+        return; 
+      }
+
       // (A) Canvasのサイズを親のサイズに合わせる
       canvas.width = canvas.offsetWidth;
       canvas.height = canvas.offsetHeight;
       
       // (B) 波の描画
       drawWave(ctx, canvas);
-  // ★★★ これを追加 ★★★
-  // 画像ロード失敗時のエラーハンドリング
-  img1.onerror = () => {
-    console.error("画像のロードに失敗しました。パスを確認してください: ", img1.src);
-  };
+      
+      // (C) 画像の描画
+      drawImageOnCanvas1(ctx, canvas, imageRef1.current);
+      drawImageOnCanvas2(ctx, canvas, imageRef2.current);
+      drawImageOnCanvas3(ctx, canvas, imageRef3.current);
     };
 
     // 6. 画像ロード完了時に初回描画
@@ -179,9 +176,7 @@ const drawImageOnCanvas3 = (
 
   // ★★★ これを追加 ★★★
   // 画像ロード失敗時のエラーハンドリング
-  img1.onerror = () => {
-    console.error("画像のロードに失敗しました。パスを確認してください: ", img1.src);
-  };
+  
     
     // 7. 画像が既にキャッシュされている場合の初回描画
     if (img1.complete) {
