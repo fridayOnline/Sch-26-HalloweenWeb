@@ -81,7 +81,7 @@ export default function Home() {
   const stars = React.useMemo(() => 
     Array.from({ length: numStars }, (_, i) => {
       const style = {
-        top: `${Math.random() * 80}%`,
+        top: `${Math.random() * 70}%`,
         left: `${Math.random() * 100}%`,
         transform: `scale(${Math.random() * 0.5 + 0.5}) rotate(${Math.random() * 360}deg)`,
         animationDelay: `${Math.random() * 5}s`, // 瞬きのタイミングをずらす
@@ -105,7 +105,7 @@ export default function Home() {
       `}</style>
         <div className='flex  flex-col justify-center items-center bg-[#011051] '>
         <div className='w-full  flex justify-center bg-gradient-to-b from-[#5FFAA1] via-[#011051] to-[#011051] '>
-          <Image src="/img/logo.png" alt="Halloween 25 Lit" width={1600} height={900} className='z-10  m-auto h-full w-full px-20 py-20' />
+          <Image src="/img/logo.svg" alt="Halloween 25 Lit" width={1600} height={900} className='z-10  m-auto h-full w-full px-20 py-20' />
           {stars}
           
         </div>
