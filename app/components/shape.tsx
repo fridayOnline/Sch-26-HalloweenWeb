@@ -1,25 +1,24 @@
 "use client";
 import React, { useRef, useEffect, useState, useCallback } from 'react';
 
-// 画像の静的なプロパティ (変更されない定義)
 const imageDefinitions = [
   {
     src: "/img/komyu_deko1.png",
     width: 120, height: 100,
-    initialX: 400, initialY: 90, // 仮想座標
-    animationPhase: 0 // アニメーションの位相 (0度)
+    initialX: 400, initialY: 90, 
+    animationPhase: 0 
   },
   {
     src: "/img/komyu_deko2.png",
     width: 120, height: 100,
     initialX: 300, initialY: 120,
-    animationPhase: Math.PI / 2 // 90度 (少しずらす)
+    animationPhase: Math.PI / 2 
   },
   {
     src: "/img/komyu_deko3.png",
     width: 140, height: 140,
     initialX: 200, initialY: 140,
-    animationPhase: Math.PI // 180度 (逆の動き)
+    animationPhase: Math.PI 
   },
 ];
 
@@ -27,13 +26,8 @@ export default function Shape() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const animationFrameId = useRef<number | null>(null);
 
-  // 画像オブジェクトを保持するRefs
-  const imageRefs = useRef<HTMLImageElement[]>(
-    imageDefinitions.map(() => new Image())
-  );
+  const imageRefs = useRef<HTMLImageElement[]>([]);
 
-  // ★★★ 変更点 1: アニメーションの動的な状態を useState から useRef に変更 ★★★
-  // useState を使うと毎フレーム再描画が走り、ループが停止してしまうため。
   const imageDynamicStates = useRef(
     imageDefinitions.map(() => ({ yOffset: 0 }))
   );
@@ -41,7 +35,6 @@ export default function Shape() {
   const VIRTUAL_WIDTH = 1000;
   const VIRTUAL_HEIGHT = 300;
 
-  // 波を描画する関数 (変更なし)
   const drawWave = useCallback((ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement) => {
     ctx.fillStyle = "#E6E8F6";
     const scaleX = canvas.width / VIRTUAL_WIDTH;
@@ -58,7 +51,6 @@ export default function Shape() {
     ctx.fill();
   }, []);
 
-  // 画像を描画する関数 (変更なし)
   const drawImageOnCanvas = useCallback((
     ctx: CanvasRenderingContext2D,
     canvas: HTMLCanvasElement,
@@ -79,7 +71,6 @@ export default function Shape() {
     ctx.drawImage(imgElement, imgX, imgY, imgDef.width, imgDef.height);
   }, []);
 
-  // 全ての要素を再描画する関数
   const redrawAll = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -90,43 +81,33 @@ export default function Shape() {
     canvas.height = canvas.offsetHeight;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // 波の描画
     drawWave(ctx, canvas);
 
-    // 各画像の描画 (★ 状態を useRef から読み取る)
     imageDefinitions.forEach((imgDef, index) => {
-      const imgState = imageDynamicStates.current[index]; // .current から取得
+      const imgState = imageDynamicStates.current[index]; 
       const imgElement = imageRefs.current[index];
       if (imgState && imgElement && imgElement.complete) {
         drawImageOnCanvas(ctx, canvas, imgDef, imgState, imgElement);
       }
     });
-  }, [drawWave, drawImageOnCanvas]); // これで依存関係が固定される
+  }, [drawWave, drawImageOnCanvas]);
 
-  // アニメーションループ
   const animate = useCallback((time: number) => {
     
     const speed = 0.002; 
     const amplitude = 10; 
 
-    // ★★★ 変更点 2: useState(setImageStates) の代わりに ref を直接更新 ★★★
     imageDynamicStates.current = imageDynamicStates.current.map((imgState, index) => {
         const imgDef = imageDefinitions[index];
         const newYOffset = Math.sin(time * speed + imgDef.animationPhase) * amplitude;
         return { ...imgState, yOffset: newYOffset };
     });
 
-    // ★★★ 変更点 3: 状態更新後に、手動で再描画を呼び出す ★★★
     redrawAll();
 
-    // 常に次のフレームをリクエスト
     animationFrameId.current = requestAnimationFrame(animate);
-  }, [redrawAll]); // 依存関係が固定される
+  }, [redrawAll]);
 
-  // ★★★ 変更点 4: 状態(imageStates)に依存した useEffect を削除 ★★★
-  // ( animate 関数内で redrawAll を呼ぶようにしたため不要になった )
-
-  // 初期化、画像ロード、リサイズ、アニメーション開始
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -136,20 +117,20 @@ export default function Shape() {
     let imagesLoadedCount = 0;
     const totalImages = imageDefinitions.length;
 
-    // アニメーション開始関数
     const startAnimationLoop = () => {
       imagesLoadedCount++;
-      // すべての画像がロード完了したらアニメーションを開始
       if (imagesLoadedCount === totalImages && animationFrameId.current === null) {
-        redrawAll(); // 初回描画
+        redrawAll(); 
         animationFrameId.current = requestAnimationFrame(animate);
       }
     };
 
-    // 画像のロード
     imageDefinitions.forEach((imgDef, index) => {
+      if (!imageRefs.current[index]) {
+        imageRefs.current[index] = new Image();
+      }
       const img = imageRefs.current[index];
-      // 既に src が設定されている場合は再ロードしない (開発環境の再実行対策)
+
       if (img.src) {
         startAnimationLoop();
         return;
@@ -159,22 +140,19 @@ export default function Shape() {
       img.onload = startAnimationLoop;
       img.onerror = () => {
         console.error(`画像のロードに失敗しました: ${imgDef.src}`);
-        startAnimationLoop(); // エラーでもカウントは進める
+        startAnimationLoop();
       };
 
-      // 画像が既にキャッシュされている場合
       if (img.complete) {
         startAnimationLoop();
       }
     });
 
-    // リサイズイベントリスナー
     const resizeListener = () => {
-      redrawAll(); // リサイズ時は再描画のみ
+      redrawAll();
     };
     window.addEventListener('resize', resizeListener);
 
-    // クリーンアップ
     return () => {
       window.removeEventListener('resize', resizeListener);
       if (animationFrameId.current) {
@@ -183,8 +161,6 @@ export default function Shape() {
       }
     };
     
-    // ★★★ 変更点 5: 依存配列を修正 ★★★
-    // これでこの useEffect はコンポーネントのマウント時に1回だけ実行される
   }, [redrawAll, animate]); 
 
   return (

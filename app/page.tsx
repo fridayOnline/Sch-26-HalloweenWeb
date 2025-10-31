@@ -113,7 +113,7 @@ export default function Home() {
         
         <div className='flex flex-row w-full gap-8 justify-center-safe px-16 pb-4 '>
           <div className='w-full aspect-video mt-24 '>
-            <Link href="https://unityroom.com/games/kinnonnhalo" className=" text-[#5FFAA1] drop-shadow-[0px_0px_4px_#5FFAA1] font-toge-maru-gothic font-bold text-[24px] mb-4  border-4 border-[#5FFAA1] shadow-inner  shadow-[#5FFAA1]/50 rounded-lg font-toge-maru-gothic p-2   hover:bg-[#5FFAA1]/30 transition"><span className='font-gotham'>Unity room</span>で開く</Link>
+            <Link href="https://unityroom.com/games/frionhalloween" className=" text-[#5FFAA1] drop-shadow-[0px_0px_4px_#5FFAA1] font-toge-maru-gothic font-bold text-[24px] mb-4  border-4 border-[#5FFAA1] shadow-inner  shadow-[#5FFAA1]/50 rounded-lg font-toge-maru-gothic p-2   hover:bg-[#5FFAA1]/30 transition"><span className='font-gotham'>Unity room</span>で開く</Link>
             <div className='relative  w-full  aspect-video  '>
             
             <div className='absolute  w-full h-full z-20'>
@@ -231,23 +231,23 @@ export default function Home() {
             </div>
               <div className='flex flex-col grow justify-start overflow-y-scroll w-full pt-4 pb-8'>
                 <div className='m-4 pr-6 transition duration-300 hover:scale-105'  >
-                  <Image src="/img/photo1.jpg" alt="Photo 1" width={350} height={250} onClick={() => openImageModal("/img/photo1.jpg")} className='rounded-md bg-white m-4 rotate-6 pt-4 pb-8 px-2 cursor-pointer'/>
+                  <Image src="/img/photo1.webp" alt="Photo 1" width={350} height={250} onClick={() => openImageModal("/img/photo1.webp")} className='rounded-md bg-white m-4 rotate-6 pt-4 pb-8 px-2 cursor-pointer'/>
                   <div className='w-[350px] h-auto'></div>
                 </div>
                 <div className='m-4  pr-6 transition duration-300 hover:scale-105' >
-                  <Image src="/img/photo1.jpg" alt="Photo 2" width={350} height={250} onClick={() => openImageModal("/img/photo2.jpg")} className='rounded-md bg-white m-4 -rotate-6 pt-4 pb-8 px-2 cursor-pointer'/>
+                  <Image src="/img/photo2.webp" alt="Photo 2" width={350} height={250} onClick={() => openImageModal("/img/photo2.webp")} className='rounded-md bg-white m-4 -rotate-6 pt-4 pb-8 px-2 cursor-pointer'/>
                   <div className='w-[350px] h-auto'></div>
                 </div>
                 <div className='m-4  pr-6 transition duration-300 hover:scale-105' >
-                  <Image src="/img/photo1.jpg" alt="Photo 3" width={350} height={250} onClick={() => openImageModal("/img/photo3.jpg")} className='rounded-md bg-white m-4 rotate-6 pt-4 pb-8 px-2 cursor-pointer'/>
+                  <Image src="/img/photo3.webp" alt="Photo 3" width={350} height={250} onClick={() => openImageModal("/img/photo3.webp")} className='rounded-md bg-white m-4 rotate-6 pt-4 pb-8 px-2 cursor-pointer'/>
                   <div className='w-[350px] h-auto'></div>
                 </div>
                 <div className='m-4  pr-6 transition duration-300 hover:scale-105' >
-                  <Image src="/img/photo1.jpg" alt="Photo 4" width={350} height={250} onClick={() => openImageModal("/img/photo4.jpg")} className='rounded-md bg-white m-4 -rotate-6 pt-4 pb-8 px-2 cursor-pointer'/>
+                  <Image src="/img/photo4.webp" alt="Photo 4" width={350} height={250} onClick={() => openImageModal("/img/photo4.webp")} className='rounded-md bg-white m-4 -rotate-6 pt-4 pb-8 px-2 cursor-pointer'/>
                   <div className='w-[350px] h-auto'></div>
                 </div>
                 <div className='m-4 pr-6 transition duration-300 hover:scale-105' >
-                  <Image src="/img/photo1.jpg" alt="Photo 5" width={350} height={250} onClick={() => openImageModal("/img/photo5.jpg")} className='rounded-md bg-white m-4 rotate-6 pt-4 pb-8 px-2 cursor-pointer'/>
+                  <Image src="/img/photo5.webp" alt="Photo 5" width={350} height={250} onClick={() => openImageModal("/img/photo5.webp")} className='rounded-md bg-white m-4 rotate-6 pt-4 pb-8 px-2 cursor-pointer'/>
                   <div className='w-[350px] h-auto'></div>
                   
                 </div>

@@ -1,1 +1,2 @@
 public/build/webgl.data filter=lfs diff=lfs merge=lfs -text
+public/finalbuild/webgl.data filter=lfs diff=lfs merge=lfs -text
