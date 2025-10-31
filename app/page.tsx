@@ -140,10 +140,11 @@ export default function Home() {
     ' 
   />
   </div>     
-            <div className='text-[#F2F3FF] font-toge-maru-gothic text-[36px] w-full font-black ju flex-grow  pt-4 f'>
+            <div className='text-[#F2F3FF] font-toge-maru-gothic text-[32px] w-full font-black ju flex-grow  pt-4 f'>
     <h3>操作方法</h3>
     <p>移動：<span className='font-gotham'>WASD</span>キー（ <span className='font-gotham'>or</span> 矢印キー）</p>
     <p>視点：マウス</p>
+    <p>カーソル表示,設定画面表示：<span className='font-gotham'>Esc</span>キー</p>
   </div>
           </div>
         <div className='flex flex-col justify-start w-[30%]'>
@@ -220,10 +221,10 @@ export default function Home() {
               boxShadow: '0 0 20px #7D56E5,inset 0 0 20px #7D56E5'
              }}
           >
-            <div className='flex flex-row  w-full justify-center-safe items-center'>
-              <Image src="/img/komyu2.png" alt="Halloween 25 Lit Logo" width={100} height={50} />
+            <div className='flex flex-row  w-full justify-center-safe items-center-safe'>
+              <Image src="/img/komyu2.png" alt="Halloween 25 Lit Logo" width={80} height={50} />
               <h3 className='text-[#F2F3FF] font-toge-maru-gothic text-[28px] font-bold'>提供写真</h3>
-              <Image src="/img/komyu1.png" alt="Halloween 25 Lit Logo" width={100} height={50} />
+              <Image src="/img/komyu1.png" alt="Halloween 25 Lit Logo" width={80} height={50} />
             </div>
               <div className='flex flex-col grow justify-start overflow-y-scroll w-full pt-4 pb-8'>
                 <div className='m-4 pr-4 '  >
@@ -307,11 +308,11 @@ export default function Home() {
   {/* 2. 前景 (テキスト) */}
   {/* relative を追加し、z-10 で手前に配置 */}
   <div className='w-full relative text-[28px] flex flex-col items-start text-[#F2F3FF] font-toge-maru-gothic font-regular pl-16 pt-16 z-10'>
-    <p>ディレクター：ピナ</p>
-    <p>ゲーム制作：さとたい ぺんぎん アンビ</p>
-    <p>デザイナー：りっちゃん かめさん みるぷ むた</p>
+    <p><span className='font-gotham'>PM</span>：ピナ</p>
+    <p>ゲーム制作：さとたい ぺんぎん アンビ ピナ</p>
+    <p>デザイナー：むた りっちゃん みるぷ かめさん </p>
     <p><span className='font-gotham'>WEB</span>制作：あーる</p>
-    <p>バーチャル背景制作：きゅる にとりん</p>
+    <p>バーチャル背景制作：にとりん こーた きゅる</p>
     <p>映像制作：ゆきま こーた にとりん</p>
     <p>謎：むた</p>
     <p><span className='font-gotham'>MC</span>：りょうさん</p>
