@@ -172,7 +172,7 @@ export default function Home() {
           >
             
             <video 
-              src="/movie/test.mp4" // 11. 選択された動画の src を表示
+              src="/movie/final.mp4" // 11. 選択された動画の src を表示
               className='object-contain rounded-md'
               controls
             />
