@@ -2,7 +2,7 @@
 import Unity, { UnityContext } from "react-unity-webgl";
 
 const unityContext = new UnityContext({
-  loaderUrl: "/build/Downloads.loader.js",
+  loaderUrl: "/build/build.loader.js",
   dataUrl: "/build/webgl.data",
   frameworkUrl: "/build/build.framework.js",
   codeUrl: "/build/build.wasm",
