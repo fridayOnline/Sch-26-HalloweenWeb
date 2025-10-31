@@ -1,5 +1,6 @@
 "use client";
 import Image from 'next/image';
+import Link from 'next/link';
 import Game from '../app/components/game';
 import YoutubeModal from './components/YoutubeModal';
 import React, { useState } from 'react';
@@ -111,8 +112,10 @@ export default function Home() {
         </div>
         
         <div className='flex flex-row w-full gap-8 justify-center-safe px-16 pb-4 '>
-          <div className='w-full aspect-video mt-28 '>
+          <div className='w-full aspect-video mt-24 '>
+            <Link href="https://unityroom.com/games/kinnonnhalo" className=" text-[#5FFAA1] drop-shadow-[0px_0px_4px_#5FFAA1] font-toge-maru-gothic font-bold text-[24px] mb-4  border-4 border-[#5FFAA1] shadow-inner  shadow-[#5FFAA1]/50 rounded-lg font-toge-maru-gothic p-2   hover:bg-[#5FFAA1]/30 transition"><span className='font-gotham'>Unity room</span>で開く</Link>
             <div className='relative  w-full  aspect-video  '>
+            
             <div className='absolute  w-full h-full z-20'>
             <Game />
             </div>
@@ -222,28 +225,28 @@ export default function Home() {
              }}
           >
             <div className='flex flex-row  w-full justify-center-safe items-center-safe'>
-              <Image src="/img/komyu2.png" alt="Halloween 25 Lit Logo" width={80} height={50} />
+              <Image src="/img/komyu2.png" alt="Halloween 25 Lit Logo" width={80} height={50} className='animate-bounce duration-[7s] [animation-delay:-0.2s]'/>
               <h3 className='text-[#F2F3FF] font-toge-maru-gothic text-[28px] font-bold'>提供写真</h3>
-              <Image src="/img/komyu1.png" alt="Halloween 25 Lit Logo" width={80} height={50} />
+              <Image src="/img/komyu1.png" alt="Halloween 25 Lit Logo" width={80} height={50} className='animate-bounce duration-[7s] [animation-delay:-0.8s]'/>
             </div>
               <div className='flex flex-col grow justify-start overflow-y-scroll w-full pt-4 pb-8'>
-                <div className='m-4 pr-4 '  >
+                <div className='m-4 pr-6 transition duration-300 hover:scale-105'  >
                   <Image src="/img/photo1.jpg" alt="Photo 1" width={350} height={250} onClick={() => openImageModal("/img/photo1.jpg")} className='rounded-md bg-white m-4 rotate-6 pt-4 pb-8 px-2 cursor-pointer'/>
                   <div className='w-[350px] h-auto'></div>
                 </div>
-                <div className='m-4  pr-4' >
+                <div className='m-4  pr-6 transition duration-300 hover:scale-105' >
                   <Image src="/img/photo1.jpg" alt="Photo 2" width={350} height={250} onClick={() => openImageModal("/img/photo2.jpg")} className='rounded-md bg-white m-4 -rotate-6 pt-4 pb-8 px-2 cursor-pointer'/>
                   <div className='w-[350px] h-auto'></div>
                 </div>
-                <div className='m-4  pr-4' >
+                <div className='m-4  pr-6 transition duration-300 hover:scale-105' >
                   <Image src="/img/photo1.jpg" alt="Photo 3" width={350} height={250} onClick={() => openImageModal("/img/photo3.jpg")} className='rounded-md bg-white m-4 rotate-6 pt-4 pb-8 px-2 cursor-pointer'/>
                   <div className='w-[350px] h-auto'></div>
                 </div>
-                <div className='m-4  pr-4' >
+                <div className='m-4  pr-6 transition duration-300 hover:scale-105' >
                   <Image src="/img/photo1.jpg" alt="Photo 4" width={350} height={250} onClick={() => openImageModal("/img/photo4.jpg")} className='rounded-md bg-white m-4 -rotate-6 pt-4 pb-8 px-2 cursor-pointer'/>
                   <div className='w-[350px] h-auto'></div>
                 </div>
-                <div className='m-4 pr-4' >
+                <div className='m-4 pr-6 transition duration-300 hover:scale-105' >
                   <Image src="/img/photo1.jpg" alt="Photo 5" width={350} height={250} onClick={() => openImageModal("/img/photo5.jpg")} className='rounded-md bg-white m-4 rotate-6 pt-4 pb-8 px-2 cursor-pointer'/>
                   <div className='w-[350px] h-auto'></div>
                   
